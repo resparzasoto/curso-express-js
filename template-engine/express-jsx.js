@@ -1,18 +1,32 @@
 const fs = require('fs');
 
+function getKeysFromOptions(options) {
+    const { settings, _locals, ...objectKeys } = options;
+    return Object.keys(objectKeys);
+}
+
 function getRenderedData(data, options) {
-    // TODO: Logic of rendering
+    const keys = getKeysFromOptions(options);
+    let contentString = data.toString();
+
+    for (const key of keys) {
+        contentString = contentString.replace(
+            new RegExp(`\{${key}\}`, "gi"),
+            options[key]);
+    }
+
+    return contentString;
 }
 
 function expressJsx(filePath, options, callback) {
     fs.readFile(filePath, function(err, data) {
         if (err) {
-            callback(err);
+            return callback(err, null);
         }
 
         const rendered = getRenderedData(data, options);
 
-        return (null, rendered);
+        return callback(null, rendered);
     });
 }
 
