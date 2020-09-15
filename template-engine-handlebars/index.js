@@ -1,4 +1,5 @@
 const express = require('express');
+const engines = require('consolidate');
 const path = require('path');
 
 const products = require('./routes/products');
@@ -7,8 +8,11 @@ const app = express();
 
 app.use(express.json());
 
+app.engine('hbs', engines.handlebars);
+
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+app.set('view engine', 'hbs');
+
 
 app.use('/products', products);
 
