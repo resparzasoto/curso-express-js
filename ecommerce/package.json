@@ -12,7 +12,9 @@
   "author": "Rubén Esparza <rubenesparzasoto95@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "mongodb": "^3.6.2",
     "pug": "^3.0.0"
   },
   "devDependencies": {
