@@ -13,12 +13,13 @@ router.delete('/:id', remove);
 
 async function list(req, res, next) {
     const { tags } = req.query;
+    console.log('tags', tags);
 
     try {
-        const products = await productService.getProducts({ tags });
+        const listedProducts = await productService.getProducts({ tags });
 
         res.status(200).send({
-            data: products,
+            data: listedProducts,
             message: 'products listed',
         });
     } catch (error) {
@@ -28,12 +29,13 @@ async function list(req, res, next) {
 
 async function get(req, res, next) {
     const { id } = req.params;
+    console.log('id', id);
 
     try {
-        const product = await productService.getProduct({ id });
+        const retrievedProduct = await productService.getProduct({ id });
 
         res.status(200).send({
-            data: product,
+            data: retrievedProduct,
             message: 'product retrieved',
         });
     } catch (error) {
@@ -43,12 +45,13 @@ async function get(req, res, next) {
 
 async function insert(req, res, next) {
     const { body } = req;
+    console.log('body', body);
 
     try {
-        const product = await productService.createProduct({ body })
+        const createdProduct = await productService.createProduct({ body })
 
         res.status(201).send({
-            data: product,
+            data: createdProduct,
             message: 'product created',
         });
     } catch (error) {
@@ -59,12 +62,14 @@ async function insert(req, res, next) {
 async function update(req, res, next) {
     const { id } = req.params;
     const { body } = req;
+    console.log('id', id);
+    console.log('body', body);
 
     try {
-        const product = await productService.updateProduct({ id, body });
+        const updatedProduct = await productService.updateProduct({ id, body });
 
         res.status(200).send({
-            data: product,
+            data: updatedProduct,
             message: 'product updated',
         });
     } catch (error) {
@@ -75,12 +80,14 @@ async function update(req, res, next) {
 async function patch(req, res, next) {
     const { id } = req.params;
     const { body } = req;
+    console.log('id', id);
+    console.log('body', body);
 
     try {
-        const product = await productService.patchProduct({ id, body });
+        const patchedProduct = await productService.patchProduct({ id, body });
 
         res.status(200).send({
-            data: product,
+            data: patchedProduct,
             message: 'product patched',
         });
     } catch (error) {
@@ -90,12 +97,13 @@ async function patch(req, res, next) {
 
 async function remove(req, res, next) {
     const { id } = req.params;
+    console.log('id', id);
 
     try {
-        const product = await productService.deleteProduct({ id });
+        const deletedProduct = await productService.deleteProduct({ id });
 
         res.status(200).send({
-            data: product,
+            data: deletedProduct,
             message: 'product deleted',
         });
     } catch (error) {
