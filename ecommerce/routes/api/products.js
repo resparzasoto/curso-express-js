@@ -6,17 +6,18 @@ const productService = new ProductsService();
 
 router.get('/', list);
 router.get('/:id', get);
-router.post('/', insert)
-router.put('/:id', update)
+router.post('/', insert);
+router.put('/:id', update);
+router.patch('/:id', patch);
 router.delete('/:id', remove);
 
 async function list(req, res, next) {
     const { tags } = req.query;
 
     try {
-        const products = await productService.getProduct({ tags });
+        const products = await productService.getProducts({ tags });
 
-        res.status(200).json({
+        res.status(200).send({
             data: products,
             message: 'products listed',
         });
@@ -31,7 +32,7 @@ async function get(req, res, next) {
     try {
         const product = await productService.getProduct({ id });
 
-        res.status(200).json({
+        res.status(200).send({
             data: product,
             message: 'product retrieved',
         });
@@ -46,7 +47,7 @@ async function insert(req, res, next) {
     try {
         const product = await productService.createProduct({ body })
 
-        res.status(201).json({
+        res.status(201).send({
             data: product,
             message: 'product created',
         });
@@ -62,9 +63,25 @@ async function update(req, res, next) {
     try {
         const product = await productService.updateProduct({ id, body });
 
-        res.status(200).json({
+        res.status(200).send({
             data: product,
             message: 'product updated',
+        });
+    } catch (error) {
+        next(error);
+    }
+}
+
+async function patch(req, res, next) {
+    const { id } = req.params;
+    const { body } = req;
+
+    try {
+        const product = await productService.patchProduct({ id, body });
+
+        res.status(200).send({
+            data: product,
+            message: 'product patched',
         });
     } catch (error) {
         next(error);
@@ -77,7 +94,7 @@ async function remove(req, res, next) {
     try {
         const product = await productService.deleteProduct({ id });
 
-        res.status(200).json({
+        res.status(200).send({
             data: product,
             message: 'product deleted',
         });
