@@ -44,11 +44,11 @@ async function get(req, res, next) {
 }
 
 async function insert(req, res, next) {
-    const { body } = req;
-    console.log('body', body);
+    const { body: data } = req;
+    console.log('data', data);
 
     try {
-        const createdProduct = await productService.createProduct({ body })
+        const createdProduct = await productService.createProduct({ data })
 
         res.status(201).send({
             data: createdProduct,
@@ -61,12 +61,12 @@ async function insert(req, res, next) {
 
 async function update(req, res, next) {
     const { id } = req.params;
-    const { body } = req;
+    const { body: data } = req;
     console.log('id', id);
-    console.log('body', body);
+    console.log('data', data);
 
     try {
-        const updatedProduct = await productService.updateProduct({ id, body });
+        const updatedProduct = await productService.updateProduct({ id, data });
 
         res.status(200).send({
             data: updatedProduct,
@@ -79,12 +79,12 @@ async function update(req, res, next) {
 
 async function patch(req, res, next) {
     const { id } = req.params;
-    const { body } = req;
+    const { body: data } = req;
     console.log('id', id);
-    console.log('body', body);
+    console.log('data', data);
 
     try {
-        const patchedProduct = await productService.patchProduct({ id, body });
+        const patchedProduct = await productService.patchProduct({ id, data });
 
         res.status(200).send({
             data: patchedProduct,
