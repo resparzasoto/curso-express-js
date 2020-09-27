@@ -16,6 +16,7 @@ async function list(req, res, next) {
     console.log('tags', tags);
 
     try {
+        // throw new Error('This is a error from API');
         const listedProducts = await productService.getProducts({ tags });
 
         res.status(200).send({

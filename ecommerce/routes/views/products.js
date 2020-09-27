@@ -10,6 +10,7 @@ async function list(req, res, next) {
     const { tags } = req.query;
 
     try {
+        // throw new Error('This is a error');
         const products = await productsService.getProducts({ tags });
 
         res.render('products', { products });
