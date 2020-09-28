@@ -12,6 +12,7 @@
   "author": "Rubén Esparza <rubenesparzasoto95@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
     "@sentry/node": "^5.24.2",
     "@sentry/tracing": "^5.24.2",
     "dotenv": "^8.2.0",

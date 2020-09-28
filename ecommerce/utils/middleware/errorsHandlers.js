@@ -17,7 +17,7 @@ function logErrors(err, req, res, next) {
 function clientErrorHandler(err, req, res, next) {
     // catch errors from AJAX request
     if (req.xhr) {
-        res.status(500).send({ err: err });
+        res.status(500).json({ err: err.message });
     } else {
         next(err);
     }
