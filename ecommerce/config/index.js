@@ -12,6 +12,10 @@ const config = {
         port: process.env.DB_PORT,
         name: process.env.DB_NAME,
     },
+    sentry: {
+        sentryDns: process.env.SENTRY_DNS,
+        sentryId: process.env.SENTRY_ID,
+    }
 };
 
 module.exports = { config };

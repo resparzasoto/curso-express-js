@@ -1,6 +1,15 @@
+const Sentry = require('@sentry/node')
+const Tracing = require('@sentry/tracing')
+
 const { config } = require('../../config');
 
+Sentry.init({
+    dsn: "https://ba40f02d2eb94c209ddf4917ebac8702@o454111.ingest.sentry.io/5443578",
+    tracesSampleRate: 1.0,
+});
+
 function logErrors(err, req, res, next) {
+    Sentry.captureException(err);
     console.log(err);
     next(err);
 }
