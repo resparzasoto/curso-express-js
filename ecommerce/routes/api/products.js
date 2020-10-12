@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const passport = require('passport');
+
 const ProductsService = require('../../services/products');
 const productService = new ProductsService();
 
@@ -13,12 +15,15 @@ const {
     updateProductSchema
 } = require('../../utils/schemas/products')
 
+// JWT Strategy
+require('../../utils/auth/strategies/jwt');
+
 router.get('/', list);
 router.get('/:id', get);
-router.post('/', validation(createProductSchema), insert);
-router.put('/:id', validation({ productId: productIdSchema }, 'params'), validation(updateProductSchema), update);
-router.patch('/:id', patch);
-router.delete('/:id', remove);
+router.post('/', passport.authenticate('jwt', { session: false }), validation(createProductSchema), insert);
+router.put('/:id', passport.authenticate('jwt', { session: false }), validation({ productId: productIdSchema }, 'params'), validation(updateProductSchema), update);
+router.patch('/:id', passport.authenticate('jwt', { session: false }), patch);
+router.delete('/:id', passport.authenticate('jwt', { session: false }), remove);
 
 async function list(req, res, next) {
     const { tags } = req.query;
