@@ -32,7 +32,6 @@ function productsApi(app) {
 
     async function list(req, res, next) {
         const { tags } = req.query;
-        console.log('tags', tags);
 
         try {
             // throw new Error('This is a error from API');
@@ -49,7 +48,6 @@ function productsApi(app) {
 
     async function get(req, res, next) {
         const { id } = req.params;
-        console.log('id', id);
 
         try {
             const retrievedProduct = await productService.getProduct({ id });
@@ -97,8 +95,6 @@ function productsApi(app) {
     async function patch(req, res, next) {
         const { id } = req.params;
         const { body: data } = req;
-        console.log('id', id);
-        console.log('data', data);
 
         try {
             const patchedProduct = await productService.patchProduct({ id, data });

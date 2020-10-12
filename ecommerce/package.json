@@ -6,12 +6,20 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
+    "dev:inspect": "nodemon --inspect index.js",
+    "dev:debug": "set DEBUG=express:*, app:* & npm run dev",
+    "debug": "set DEBUG=express:*, app:* & npm run start",
     "test": "mocha --exit",
     "test:cover": "nyc npm run test"
   },
   "nyc": {
     "all": true,
-    "include": ["routes", "services", "lib", "utils"]
+    "include": [
+      "routes",
+      "services",
+      "lib",
+      "utils"
+    ]
   },
   "keywords": [],
   "author": "Rubén Esparza <rubenesparzasoto95@gmail.com>",
@@ -22,6 +30,7 @@
     "@sentry/node": "^5.24.2",
     "@sentry/tracing": "^5.24.2",
     "bcrypt": "^5.0.0",
+    "debug": "^4.2.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",

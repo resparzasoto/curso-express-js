@@ -1,4 +1,5 @@
 const { MongoClient, ObjectId } = require('mongodb');
+const debug = require('debug')('app:mongo');
 
 const { config } = require('../config');
 
@@ -16,7 +17,7 @@ class MongoLib {
         {
             try {
                 await this.client.connect();
-                console.log('Connected successfully to mongo');
+                debug('Connected successfully to mongo');
                 MongoLib.connection = this.client;
             } catch (error) {
                 return error;
